@@ -15,12 +15,9 @@ const ForecastContainer = ({cityName, weatherCurrent, weatherForecast}) => {
   const [selectedDayIndex, setSelectedDayIndex] = useState(0)
   const {time, timezone} = weatherCurrent
 
-  // set the selectedDay to the current day by fetching current city date from weatherCurrent timestamp
   const updateSelectedDay = async () => {
-    // show forecast elements when formattedDateTime is not an empty string & an error message starting with Failed
     if (!isUndefined(weatherCurrent.time)) {
       const today = FormatTime(time, timezone, 'MM/DD/YYYY')
-      // check if today key exist in days
       if (!isEmpty(weatherForecast) && !isUndefined(weatherForecast)) {
         setSelectedDay(weatherForecast.days[today] ? today : '')
         selectedDayIndexHandler(weatherForecast.days[today] ? today : '')
@@ -28,7 +25,6 @@ const ForecastContainer = ({cityName, weatherCurrent, weatherForecast}) => {
     }
   }
 
-  // find the index of selectedDay in days object
   const selectedDayIndexHandler = selectedDay => {
     const index = Object.keys(weatherForecast.days).indexOf(selectedDay)
     setSelectedDayIndex(index !== -1 ? index : 0)
@@ -39,6 +35,7 @@ const ForecastContainer = ({cityName, weatherCurrent, weatherForecast}) => {
    * @param {String} day
    */
   const daySelectHandler = day => {
+    console.log(day)
     setSelectedDay(day)
     selectedDayIndexHandler(day)
   }
@@ -95,8 +92,6 @@ const ForecastContainer = ({cityName, weatherCurrent, weatherForecast}) => {
             <div
               className={`flex flex-col mt-4 sm:mt-0 sm:flex-row w-full rounded`}>
               {Object.keys(weatherForecast.days).map((day, index) => {
-                // day is key in weatherForecast.days -> '02/28/2020'
-                // index is the position of key -> 0
                 return (
                   <DayComponent
                     day={weatherForecast.days[day]}

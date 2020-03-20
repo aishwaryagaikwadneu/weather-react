@@ -8,7 +8,6 @@ import WeatherIconComponent from './WeatherIconComponent'
 import {ThemeContext} from '../../context/ThemeContext'
 
 const DayComponent = props => {
-  console.log(props)
   const {day, index, selectedIndex} = props
   const {weatherUnit} = useContext(WeatherUnitContext)
   const {theme, colorTheme} = useContext(ThemeContext)
@@ -23,7 +22,6 @@ const DayComponent = props => {
       : fToC(day[`temperature${type}`])
   }
 
-  // emit event to forecastContainer
   const selectedDay = () => {
     props.selectedDay({day})
   }

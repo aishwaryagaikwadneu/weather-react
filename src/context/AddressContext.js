@@ -99,8 +99,6 @@ class AddressContextProvider extends Component {
         localStorage.setItem('urban-areas', JSON.stringify(urban_areas))
       }
 
-      // use ipapi.co API instead of using browser's default geolocation API
-      // since cityName is important and cannot be fetched using browser geolocation API
       this.fetchAddressInfo()
     } catch (error) {
       Sentry.captureException(error)
